@@ -1,7 +1,7 @@
 ```bash
 #!/bin/bash
 #title           :backupScript.bash
-#description     :Automatisiertes Backupscript mittels rsync
+#description     :Backupscript mittels rsync
 #author          :mathiasrudig
 #date            :20201229
 #version         :0.3    
