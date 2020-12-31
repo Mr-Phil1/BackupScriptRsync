@@ -1,4 +1,3 @@
-# BackupScriptRsync
 # Automatisiertes Linux Bash Backupscript mittels rsync
 
 ## Einleitung
