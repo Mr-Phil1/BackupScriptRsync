@@ -125,6 +125,7 @@ else
 fi
 
 # ©mathias rudig
+# https://github.com/mathiasrudig29/BackupScriptRsync
 ```
 ## Erweiterung mittels "crontab":
 Man könnte das Script noch voll mittels crontab Automatisieren, um automatisch einmal pro Tag das Script auszuführen. Dazu muss ein Eintrag unter `crontab -e` in folgender Form angefügt werden:  
