@@ -1,4 +1,4 @@
-# Automatisiertes Linux Bash Backupscript mittels rsync
+# Linux Bash Backupscript mittels rsync
 
 ## Einleitung
 
@@ -36,7 +36,7 @@ Ich starte zwei Linux 20.04.1 LTS Maschinen über das Virtualisierungsprogramm V
 ```bash
 #!/bin/bash
 #title           :backupScript.bash
-#description     :Automatisiertes Backupscript mittels rsync
+#description     :Backupscript mittels rsync
 #author          :mathiasrudig
 #date            :20201229
 #version         :0.3    
