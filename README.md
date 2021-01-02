@@ -1,4 +1,4 @@
-# Linux Bash Backupscript mittels rsync
+# Linux Bash Backupscript mittels `rsync` und `crontab`
 
 ## Einleitung
 
