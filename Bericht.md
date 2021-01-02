@@ -1,4 +1,4 @@
-# Linux Bash Backupscript mittels rsync
+# Linux Bash Backupscript mittels `rsync` und `crontab`
 
 ## Einleitung
 
@@ -18,7 +18,7 @@ Der folgende Bericht beinhaltet ein Bash-Script, welches ein Backup eines Ordner
 
 Im folgenden Abschnitt wird das Erstellen einer MySQL-Datenbank beschrieben. Zuerst wird der Server mit `sudo apt install mysql-server` installiert, man sollte jedoch zuvor die neusten Updates mit `sudo apt update` runterladen. Anschließend kann der Dienst mit `sudo mysql` gestartet und mit dem Befehl `CREATE DATABASE my_logs;` eine Datenbank namens my_logs angelegt werden. Innerhalb des MySQL-Dienstes ist es wichtig, Befehle immer mit einem ";" abzuschließen. Nach erstellen kann die Datenbank mit dem Befehl `use  my_logs;` verwendet werden. Nun kann eine Tabelle per Befehl erstellt werden, oder wie in unserem Fall eine zuvor erstellte Textdatei (logTabelle.sql), die den Befehl beinhaltet außerhalb des MySQL-Dienstes mittels `sudo mysql my_logs < logTabelle.sql` eingelesen werden. Somit haben wir eine Tabelle innerhalb unserer Datenbank my_logs erstellt und können diese nun für Einträge nutzen.
 
-### Inhalt der "logTabelle.sql" Datei:
+### Inhalt der "logTabelle.sql" Datei
 ```sql
 CREATE TABLE BackupLogs (
     id int NOT NULL AUTO_INCREMENT,
@@ -28,6 +28,8 @@ CREATE TABLE BackupLogs (
     PRIMARY KEY (id)
 );
 ```
+## Vorbereitung ssh-remote Verbindung
+Damit das Script voll Automatisiert werden kann, muss noch eine Passwortlose ssh-Anmeldung eingerichtet werden, welche in zwei einfachen Schritten eingerichtet werden kann. Zuerst muss ein öffentliches / privates Schlüsselpaar auf dem Server, auf dem das Backup erstellt wird, mit dem Befehl 'ssh-keygen' generiert werden und die folgeneden Fragen einfach bestätigt werden. Anschließend muss der generierte Schlüssel auf den Remote-Rechner mit 'ssh-copy-id remote-user @ server-ip' in meinem Fall 'mathias@192.168.56.32' übertragen werden und mit dem Passwort des entfernten Rechners bestätigt werden. Nun sollte eine ssh-Verbindung ohne Passwortabfrage funktionieren.
 
 ## Durchführung
 
@@ -127,19 +129,17 @@ fi
 # ©mathias rudig
 # https://github.com/mathiasrudig29/BackupScriptRsync
 ```
-## Erweiterung mittels "crontab":
+## Erweiterung mittels "crontab"
 Man könnte das Script noch voll mittels crontab Automatisieren, um automatisch einmal pro Tag das Script auszuführen. Dazu muss ein Eintrag unter `crontab -e` in folgender Form angefügt werden:  
 ```bash
 # m h  dom mon dow   command
 0 0 * * * /usr/bin/bash /home/mathias/tinf/Backup/backupScript.bash /home/mathias/tinf/Backup/Dokumente /home/mathias/tinf/Backup/backup
 ```
-Wichtig ist, dass man absolute Dateipfade verwendet, damit immer auf die richtigen Verzeichnisse und Dateien zugegriffen wird. Damit das Script nun Auomatisiert läuft, muss noch das Passwort mitgegeben werden, welches nicht als Klartext innerhalb des Scripts eingetragen werden sollte. Da mir zum heutigen Stand noch das nötige Wissen fehlt, wird dies nachgereicht.
+Wichtig ist, dass man absolute Dateipfade verwendet, damit immer auf die richtigen Verzeichnisse und Dateien zugegriffen wird. Da oben eine passwortlose ssh-Verbindung eingerichtet wurde, sollte alles ohne Probleme funktionieren.
 
 ## Literaturverzeichnis
 
-* https://wiki.ubuntuusers.de/ - wurde für die Recherche genutzt
+* https://wiki.ubuntuusers.de/
+* https://www.linuxbabe.com/linux-server/setup-passwordless-ssh-login
 * `man rsync` - Manual-Page innerhalb von Linux von rsync
 * `man tar` - Manual-Page innerhalb von Linux von tar
-
-
-                
