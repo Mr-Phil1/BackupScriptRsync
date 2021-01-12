@@ -130,7 +130,7 @@ fi
 # https://github.com/mathiasrudig29/BackupScriptRsync
 ```
 ## Erweiterung mittels "crontab"
-Man könnte das Script noch voll mittels crontab Automatisieren, um automatisch einmal pro Tag das Script auszuführen. Dazu muss ein Eintrag unter `crontab -e` in folgender Form angefügt werden:  
+Man könnte das Script noch voll mittels crontab Automatisieren, um automatisch einmal pro Tag das Script auszuführen. Dazu muss ein Eintrag unter `crontab -e` mit sudo in folgender Form angefügt werden:  
 ```bash
 # m h  dom mon dow   command
 0 0 * * * /usr/bin/bash /home/mathias/tinf/Backup/backupScript.bash /home/mathias/tinf/Backup/Dokumente /home/mathias/tinf/Backup/backup
